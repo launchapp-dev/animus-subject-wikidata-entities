@@ -1,0 +1,54 @@
+schema = "animus.plugin.v1"
+name = "animus-subject-wikidata-entities"
+version = "0.1.0"
+plugin_kind = "subject_backend"
+description = "Wikidata entities subject backend plugin for Animus"
+protocol = "stdio"
+
+[binary]
+default = "animus-subject-wikidata-entities"
+
+[capabilities]
+streaming = false
+progress = false
+cancellation = false
+methods = [
+  "subject/list",
+  "subject/get",
+  "subject/schema",
+  "wikidata.entity/list",
+  "wikidata.entity/get",
+  "wikidata.entity/schema",
+  "health/check",
+]
+subject_kinds = ["wikidata.entity"]
+
+[[env]]
+key = "WIKIDATA_SEARCH"
+description = "Optional entity search text. Defaults to machine learning."
+required = false
+
+[[env]]
+key = "WIKIDATA_LANGUAGE"
+description = "Optional result language. Defaults to en."
+required = false
+
+[[env]]
+key = "WIKIDATA_TYPE"
+description = "Optional entity type: item or property. Defaults to item."
+required = false
+
+[[env]]
+key = "WIKIDATA_API_URL"
+description = "Optional Wikidata API URL. Defaults to https://www.wikidata.org/w/api.php."
+required = false
+
+[[env]]
+key = "WIKIDATA_QUERY"
+description = "Optional local text query applied to entities after fetch."
+required = false
+
+[[env]]
+key = "WIKIDATA_LIMIT"
+description = "Optional maximum entity count from 1 to 50. Defaults to 25."
+required = false
